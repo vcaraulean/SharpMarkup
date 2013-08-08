@@ -46,11 +46,8 @@ module Definitions =
     | AlignCenter
     | AlignDefault
 
-  //-- | Table cells are list of Blocks
-  type TableCell = List<Block>
-
   //-- | Inline elements.
-  and Inline = 
+  type Inline = 
     | Str of string                     //-- ^ Text (string)
     | Emph of Inline list               //-- ^ Emphasized text (list of inlines)
     | Strong of Inline list             //-- ^ Strongly emphasized text (list of inlines)
@@ -90,16 +87,20 @@ module Definitions =
                                                         //-- and a list of items, each a list of blocks)
     | BulletList of Block list list     //-- ^ Bullet list (list of items, each
                                         //-- a list of blocks)
-    | DefinitionList of List<Inline list * Block list list>   //-- ^ Definition list
+    | DefinitionList of list<Inline list * Block list list>   //-- ^ Definition list
                                                               //-- Each list item is a pair consisting of a
                                                               //-- term (a list of inlines) and one or more
                                                               //-- definitions (each a list of blocks)
-    | Header of int * Attr * List<Inline>  //-- ^ Header - level (integer) and text (inlines)
+    | Header of int * Attr * list<Inline>  //-- ^ Header - level (integer) and text (inlines)
     | HorizontalRule                    //-- ^ Horizontal rule
-    | Table of List<Inline> * List<Alignment> * List<double> * List<TableCell> * List<List<TableCell>>   //-- ^ Table,
+    | Table of list<Inline> * list<Alignment> * list<double> * list<TableCell> * list<list<TableCell>>   //-- ^ Table,
                                                   //-- with caption, column alignments,
                                                   //-- relative column widths (0 = default),
                                                   //-- column headers (each a list of blocks), and
                                                   //-- rows (each a list of lists of blocks)
     | Null                              //-- ^ Nothing
 
+  //-- | Table cells are list of Blocks
+  and TableCell = list<Block>
+
+  type SharpDoc = list<Block>
